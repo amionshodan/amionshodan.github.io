@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Am I On Shodan?</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                "error": function() {
+                    $('body').html('You\'ll need to disable your ad/tracker blocker for this page to work.')
+                }
+            });
+
+            $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
+                if (typeof(data) != 'undefined') {
+                    window.location = 'https://shodan.io/host/' + data.ip
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <noscript>
+        You know the drill, enable Javascript for this site to work.
+    </noscript>
+</body>
+
+</html>
